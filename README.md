@@ -5,9 +5,9 @@ Udacity Course, Data Engineering Nanodegree, 2nd Project, Data Warehouse with Am
 
 The following modules need to be installed:
 
-	- psycopg2
-	- boto3
-  - ipython-sql
+- psycopg2
+- boto3
+- ipython-sql
 
 Make sure the file dwh.cfg is filled in with AWS section (key, secret, session_token).
 
