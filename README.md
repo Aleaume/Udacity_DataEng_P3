@@ -73,6 +73,52 @@ The file structure itself is similar to this:
 
 ![image](https://user-images.githubusercontent.com/32632731/143940527-05d48049-afcd-4e62-affb-46b28bab4e2f.png)
 
+### staging_events
+
+```SQL
+CREATE TABLE IF NOT EXISTS staging_events(\
+                                artist varchar,
+                                auth varchar,
+                                firstName varchar,
+                                gender varchar,
+                                itemInSession int,
+                                lastName varchar,
+                                length float,
+                                level varchar,
+                                location varchar,
+                                method varchar,
+                                page varchar,
+                                registration float,
+                                sessionId int,
+                                song varchar,
+                                status int,
+                                ts bigint,
+                                userAgent varchar,
+                                userId int
+    )
+
+```
+
+### staging_songs
+
+```SQL
+
+CREATE TABLE IF NOT EXISTS staging_songs(\
+                                num_songs int,
+                                artist_id varchar,
+                                artist_latitude float,
+                                artist_longitude float,
+                                artist_location varchar,
+                                artist_name varchar,
+                                song_id varchar,
+                                title varchar,
+                                duration float,
+                                year int
+
+    )
+
+```
+
 
 - The sparkify DB and tables is created as showed in this diagramm, following Star Schema, were the songplays table is the fact table and the other 4 (users, songs, artists, time) are the dimension tables:
 
@@ -80,19 +126,75 @@ The file structure itself is similar to this:
 
 
 
-### songplay
+### songplays
+
+```SQL
+
+CREATE TABLE IF NOT EXISTS songplays(\
+                        songplay_id int IDENTITY(0,1) PRIMARY KEY, \
+                        start_time timestamp NOT NULL, \
+                        user_id int NOT NULL,\
+                        level varchar,\
+                        song_id varchar,\
+                        artist_id varchar,\
+                        session_id int,\
+                        location varchar,\
+                        user_agent varchar);
+
+```
 
 ### users
 
+```SQL
+CREATE TABLE IF NOT EXISTS users(\
+                    user_id int PRIMARY KEY,\
+                    first_name varchar,\
+                    last_name varchar,\
+                    gender varchar,\
+                    level varchar);
+
+```
+
 ### songs
+
+```SQL
+CREATE TABLE IF NOT EXISTS songs(\
+                    song_id varchar PRIMARY KEY,\
+                    title varchar,\
+                    artist_id varchar NOT NULL,\
+                    year int,\
+                    duration float);
+
+```
 
 ### artists
 
+```SQL
+
+CREATE TABLE IF NOT EXISTS artists(\
+                        artist_id varchar PRIMARY KEY,\
+                        name varchar,\
+                        location varchar,\
+                        latitude float,\
+                        longitude float);
+
+```
+
 ### time
 
-### staging_xxx
+```SQL
+CREATE TABLE IF NOT EXISTS time (\
+                    start_time timestamp PRIMARY KEY,\
+                    hour int,\
+                    day int,\
+                    week int,\
+                    month int,\
+                    year int,\
+                    weekday int);
 
-### staging_xxx
+```
+
+
 
 ## Redshift
 
