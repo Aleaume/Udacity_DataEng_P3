@@ -25,6 +25,10 @@ Make sure the file dwh.cfg is filled in with AWS section (key, secret, session_t
 
 ![image](https://user-images.githubusercontent.com/32632731/142909873-78d3c213-c4b4-4b67-a788-6fc1814a15f8.png)
 
+
+![image](https://user-images.githubusercontent.com/32632731/143939822-4e0d12a6-717a-442a-8051-ccd67a38d08e.png)
+
+
 ### songplay
 
 ### users
