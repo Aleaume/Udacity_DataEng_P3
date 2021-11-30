@@ -34,17 +34,18 @@ s3://udacity-dend/
 It contains the different dataset needed for this project, that will be picked up by the etl.py scripts and copied over into the Redshift instance.
 For more details on the dataset see the section "Dataset" = > https://github.com/Aleaume/Udacity_DataEng_P3#dataset 
 
-#### ![image](https://user-images.githubusercontent.com/32632731/144020834-c8a20173-1244-4789-af1a-b9418ef49846.png) The Data Warehouse
+#### ![image](https://user-images.githubusercontent.com/32632731/144020834-c8a20173-1244-4789-af1a-b9418ef49846.png width=100) The Data Warehouse
 
 The Data warehouse used in this exercise is an AWS Redshift cluser. It is actually configured and set up via jupyter notebook (see section below).
 In this example we made used of the following parameters:
 
-Param	Value
-0	DWH_CLUSTER_TYPE	multi-node
-1	DWH_NUM_NODES	4
-2	DWH_NODE_TYPE	dc2.large
-3	DWH_CLUSTER_IDENTIFIER	dwhCluster
-
+Param | Value 
+--- | --- 
+DWH_CLUSTER_TYPE	| multi-node
+DWH_NUM_NODES	| 4
+DWH_NODE_TYPE	| dc2.large
+DWH_CLUSTER_IDENTIFIER	| dwhCluster
+	
 #### config script
 
 #### "SQL" files
