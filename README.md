@@ -240,6 +240,102 @@ CREATE TABLE IF NOT EXISTS time (\
 
 ## ETL (Extract Transform Load)
 
+Composed of two major steps, the copy of the data from the S3 bucket to the staging tables & the insert into the final tables:
+
+### COPY into Staging tables
+
+#### staging_events
+
+```SQL
+("""
+	copy staging_events from 's3://udacity-dend/log_data/' 
+	credentials 'aws_iam_role={}'
+	format json as 's3://udacity-dend/log_json_path.json'
+	region 'us-west-2'
+	dateformat 'auto';
+""").format(ARN)
+
+```
+#### staging_songs
+
+```SQL
+
+("""
+	copy staging_songs from 's3://udacity-dend/song_data/{}' 
+	credentials 'aws_iam_role={}'
+	format as json 'auto'
+	region 'us-west-2';
+""").format('',ARN)
+
+```
+
+### INSERTS into final tables
+
+#### songplays
+
+```SQL
+INSERT INTO songplays(start_time, user_id,level, song_id, artist_id, session_id, location, user_agent)\
+                                SELECT DISTINCT timestamp 'epoch' + CAST(e.ts AS BIGINT)/1000 * interval '1 second' ,\
+                                        e.userId, e.level, s.song_id, s.artist_id, e.sessionId, e.location, e.userAgent \
+                                FROM staging_events e \
+                                INNER JOIN staging_songs s \
+                                ON e.song = s.title AND \
+                                e.artist = s.artist_name AND \
+                                e.length = s.duration \
+                                WHERE e.page = 'NextSong' \
+                                AND userID IS NOT NULL;
+
+```
+
+#### users
+
+```SQL
+INSERT INTO users(user_id, first_name, last_name, gender, level)\
+                            SELECT DISTINCT userId, firstName, lastName, gender, level \
+                            FROM staging_events \
+                            WHERE page = 'NextSong'\
+                            AND userID IS NOT NULL;
+
+```
+
+#### songs
+
+```SQL
+INSERT INTO songs(song_id, title, artist_id, year, duration)\
+                            SELECT DISTINCT song_id, title, artist_id, year, duration \
+                            FROM staging_songs;
+
+```
+
+#### artists
+
+```SQL
+
+INSERT INTO artists(artist_id, name, location, latitude, longitude)\
+                            SELECT DISTINCT artist_id, artist_name, artist_location, artist_latitude, artist_longitude \
+                            FROM staging_songs;
+```
+
+#### time
+
+```SQL
+INSERT INTO time(start_time, hour, day, week, month, year, weekday)\
+                            SELECT DISTINCT timestamp 'epoch' + CAST(ts AS BIGINT)/1000 * interval '1 second' AS ts_ts, \
+                            EXTRACT(HOUR FROM ts_ts), \
+                            EXTRACT(DAY FROM ts_ts), \
+                            EXTRACT(WEEK FROM ts_ts),\
+                            EXTRACT(MONTH FROM ts_ts),\
+                            EXTRACT(YEAR FROM ts_ts), \
+                            EXTRACT(WEEKDAY FROM ts_ts)  \
+                            FROM staging_events \
+                            WHERE page = 'NextSong';
+
+```
+
+### Execution
+
+All is called at once from the etl.py file and we can see in Redshift the execution results & times
+
 ![image](https://user-images.githubusercontent.com/32632731/143939822-4e0d12a6-717a-442a-8051-ccd67a38d08e.png)
 
 ## Improvement suggestions / Additional work
