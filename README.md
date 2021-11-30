@@ -34,7 +34,7 @@ s3://udacity-dend/
 It contains the different dataset needed for this project, that will be picked up by the etl.py scripts and copied over into the Redshift instance.
 For more details on the dataset see the section "Dataset" = > https://github.com/Aleaume/Udacity_DataEng_P3#dataset 
 
-#### ![image](https://user-images.githubusercontent.com/32632731/144020834-c8a20173-1244-4789-af1a-b9418ef49846.png width=100) The Data Warehouse
+#### The Data Warehouse
 
 The Data warehouse used in this exercise is an AWS Redshift cluser. It is actually configured and set up via jupyter notebook (see section below).
 In this example we made used of the following parameters:
@@ -46,14 +46,36 @@ DWH_NUM_NODES	| 4
 DWH_NODE_TYPE	| dc2.large
 DWH_CLUSTER_IDENTIFIER	| dwhCluster
 	
-#### config script
+#### Config file
 
-#### "SQL" files
+The dwh.cfg file is mainly used for setting up the Redhsift instance but is also called at each DB query to authentify and get the right Database.
+There are 4 sections:
+- Cluster, for all Redhshift & DB parameters
+- IAM Role
+- S3
+- AWS
+
+#### "SQL" file
+
+The sql_queries.py file is the main placeholder for SQL queries exectued in this project. There are calls by either the etl.py , the create_tables.py or the test jupyter notebook.
+
+There are mainly grouped into 4 groups:
+- Table creation
+- Copy ingestion
+- Star schema tables inserts
+- Testing
 
 #### "Execution" scripts
 
+There are 2 main execution scripts in this project.
+- create_tables.py focused on creatin both the staging tables & the star schema tables (more details in the section Tables Creation & queries)
+- etl.py used for the pickup of the data from S3 (Extract), the copy in the staging tables and the insert in a more suitable format in final tables (Transform & Load)
+
 #### Jupyter Notebooks
 
+There are 2 (optional) Jupyer Notebooks in this project:
+- redshift_create.ipynb which main role is to create the redhsift cluster, create the needed policy & role to access an S3 bucker, and opening the TCP port to communicate to the cluster. Also, this notebook can be used to decommisioned everything created.
+- test.ipynb a simple notebook to test that the ETL task went well.
 
 ### Dataset
 
