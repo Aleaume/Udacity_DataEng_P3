@@ -1,6 +1,8 @@
 # Udacity_DataEng_P3
 Udacity Course, Data Engineering Nanodegree, 2nd Project, Data Warehouse with Amazon Redshift
 
+
+
 ## Requirements
 
 The following modules need to be installed:
@@ -340,3 +342,38 @@ All is called at once from the etl.py file and we can see in Redshift the execut
 
 ## Improvement suggestions / Additional work
 
+2 main additional tasks have been delivered in this project:
+- The jupyter notebook to create (& decommission) the Redshift cluster, making it easier to start working directly
+
+```python
+
+# Creating the Redshift Cluster
+
+try:
+    response = redshift.create_cluster(        
+        ClusterType=DWH_CLUSTER_TYPE,
+        NodeType=DWH_NODE_TYPE,
+        NumberOfNodes=int(DWH_NUM_NODES),
+
+        DBName=DWH_DB,
+        ClusterIdentifier=DWH_CLUSTER_IDENTIFIER,
+        MasterUsername=DWH_DB_USER,
+        MasterUserPassword=DWH_DB_PASSWORD,
+        
+        IamRoles=[roleArn]
+    )
+except Exception as e:
+    print(e)
+```
+
+![image](https://user-images.githubusercontent.com/32632731/144027369-c2075d58-afa5-4977-aaa2-e850e198cc85.png)
+
+
+- The test notebook, useful when checking the final tables were properly populated:
+
+![image](https://user-images.githubusercontent.com/32632731/144027508-5419f922-9aa4-4881-8e59-8634701da0d6.png)
+
+
+However I believe there are many ways to further improve the project:
+- Detailed quality checks (on distinct values)
+- User test queries, such as retrieving songs, artists, user activities...
