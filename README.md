@@ -237,9 +237,6 @@ CREATE TABLE IF NOT EXISTS time (\
 ```
 
 
-
-## Redshift
-
 ## ETL (Extract Transform Load)
 
 Composed of two major steps, the copy of the data from the S3 bucket to the staging tables & the insert into the final tables:
