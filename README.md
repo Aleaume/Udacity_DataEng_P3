@@ -24,6 +24,9 @@ And the second is populate previously designed star Schema (https://github.com/A
 
 The project is composed of different cloud components and a few scripts working together as described in this diagram:
 
+![image](https://user-images.githubusercontent.com/32632731/144011578-82577f79-4b3a-4e01-86ec-34b6a1dc6b36.png)
+
+
 #### The S3 Bucket
 
 #### The Data Warehouse
