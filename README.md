@@ -24,12 +24,26 @@ And the second is populate previously designed star Schema (https://github.com/A
 
 The project is composed of different cloud components and a few scripts working together as described in this diagram:
 
-![image](https://user-images.githubusercontent.com/32632731/144011845-560f9c2f-95b4-467f-9364-1f2332668a0f.png)
+![image](https://user-images.githubusercontent.com/32632731/144019507-0df97b95-04b6-4cfb-b016-1e84cdaee1df.png)
 
 
 #### The S3 Bucket
 
-#### The Data Warehouse
+An AWS Bucket made publicly available, own & managed by udacity.
+s3://udacity-dend/
+It contains the different dataset needed for this project, that will be picked up by the etl.py scripts and copied over into the Redshift instance.
+For more details on the dataset see the section "Dataset" = > https://github.com/Aleaume/Udacity_DataEng_P3#dataset 
+
+#### ![image](https://user-images.githubusercontent.com/32632731/144020834-c8a20173-1244-4789-af1a-b9418ef49846.png) The Data Warehouse
+
+The Data warehouse used in this exercise is an AWS Redshift cluser. It is actually configured and set up via jupyter notebook (see section below).
+In this example we made used of the following parameters:
+
+Param	Value
+0	DWH_CLUSTER_TYPE	multi-node
+1	DWH_NUM_NODES	4
+2	DWH_NODE_TYPE	dc2.large
+3	DWH_CLUSTER_IDENTIFIER	dwhCluster
 
 #### config script
 
