@@ -26,6 +26,9 @@ The project is composed of different cloud components and a few scripts working 
 
 ![image](https://user-images.githubusercontent.com/32632731/144011578-82577f79-4b3a-4e01-86ec-34b6a1dc6b36.png)
 
+![image](https://user-images.githubusercontent.com/32632731/144011665-81b0098a-b822-4274-b0b8-927e3d09c29b.png)
+
+
 
 #### The S3 Bucket
 
