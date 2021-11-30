@@ -15,7 +15,7 @@ Make sure the file dwh.cfg is filled in with AWS section (key, secret, session_t
 ## Overview
 
 In this project the goal is to design & create the appropriate Data Warehouse on AWS Redshift with its tables for a music streaming app (sparkify)
-Once done, the tast is to set up and execute an ETL pipeline capable of 2 major steps:
+Once done, the task is to set up and execute an ETL pipeline capable of 2 major steps:
 The first step is to fetch the data stored in a publicly available S3 bucket and store it in staging tables.
 And the second is populate previously designed star Schema (https://github.com/Aleaume/Udacity_DataEng_P1) with this data.
 
